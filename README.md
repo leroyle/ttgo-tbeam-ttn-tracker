@@ -16,14 +16,23 @@ NOTE: There are now 2 versions of the TTGO T-BEAM, the first version (Rev0) and 
 
 ### Setup
 
-1. Follow the directions at [espressif/arduino-esp32](https://github.com/espressif/arduino-esp32) to install the board to the Arduino IDE and use board 'T-Beam'.
+1. Follow the directions at [espressif/arduino-esp32](https://github.com/espressif/arduino-esp32) to install the board to the Arduino IDE and use board 'T-Beam'.  
+In summary, within the Arduino IDE open Boards Manager from Tools > Board menu and search for and install the "esp32" platform (and don't forget to select your ESP32 board from Tools > Board menu after installation).
 
-2. Install the Arduino IDE libraries:
+2. Install the following Arduino IDE libraries:
 
-   * [mcci-catena/arduino-lmic](https://github.com/mcci-catena/arduino-lmic) (for Rev0 and Rev1)
-   * [mikalhart/TinyGPSPlus](https://github.com/mikalhart/TinyGPSPlus) (for Rev0 and Rev1)
-   * [ThingPulse/esp8266-oled-ssd1306](https://github.com/ThingPulse/esp8266-oled-ssd1306) (for Rev0 and Rev1)
-   * [lewisxhe/AXP202X_Library](https://github.com/lewisxhe/AXP202X_Library) (for Rev1 only)
+   1. [mcci-catena/arduino-lmic](https://github.com/mcci-catena/arduino-lmic) (for Rev0 and Rev1)  
+    Executing ```git clone https://github.com/mcci-catena/arduino-lmic.git``` within the Arduino project's libraries directory should install the proper and latest version of the library.
+    
+   2. [ThingPulse/esp8266-oled-ssd1306](https://github.com/ThingPulse/esp8266-oled-ssd1306) (for Rev0 and Rev1)  
+    Executing ```git clone https://github.com/ThingPulse/esp8266-oled-ssd1306.git``` within the Arduino project's libraries directory should install proper and the latest version of the library.
+    
+   3. [mikalhart/TinyGPSPlus](https://github.com/mikalhart/TinyGPSPlus) (for Rev0 and Rev1)  
+    Executing ```git clone https://github.com/mikalhart/TinyGPSPlus.git``` within the Arduino project's libraries directory should install the proper and latest version of the library.
+   4. [lewisxhe/AXP202X_Library](https://github.com/lewisxhe/AXP202X_Library) (or Rev0 and Rev1)  
+    Executing ```git clone https://github.com/lewisxhe/AXP202X_Library.git``` within the Arduino project's libraries directory should install the proper and latest version of the library.
+
+
 
 3. Edit ```arduino-lmic/project_config/lmic_project_config.h``` and uncomment the proper frequency for your region.
 
