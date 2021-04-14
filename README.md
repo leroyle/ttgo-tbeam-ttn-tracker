@@ -1,23 +1,21 @@
 <!-- ## TTGO T-Beam Tracker for The Things Network and/or The Helium Network  -->
 ## TTGO T-Beam Tracker for use with a LoRaWan Networks
 
-This code was originally developed for use on The Things Network it has been repurposed for use with the Helium Network.
+This code was originally developed for use on The Things Network it has been editied/repurposed for use with the Helium Network.
 
 <!-- Uploads GPS data from the TTGO T-Beam to [The Things Network](https://www.thethingsnetwork.org) (TTN) and [TTN Mapper](https://ttnmapper.org) for tracking and determining signal strength of LoRaWAN gateways and nodes.
 -->
-Uploads GPS data from the TTGO T-Beam to be used for tracking and determining signal strength of LoRaWAN gateways and nodes. e following networks are know to use this code:
-- [The Things Network](https://www.thethingsnetwork.org) (TTN) for [TTN Mapper](https://ttnmapper.org)
-- [The Helium Network](https://www.helium.com) (TTN) for [Helium Mapper](https://mappers.helium.com/) and [Helium Cargo](https://cargo.helium.com//)
+This TTGO device application uploads GPS data from the TTGO T-Beam to be used for tracking and determining signal strength of LoRaWAN gateways and nodes. e following networks are know to use this code:
+- [The Helium Network](https://www.helium.com) for [Helium Mapper](https://mappers.helium.com/) and [Helium Cargo](https://cargo.helium.com/)
 
 Current version: 1.2.1
 
-#### This version is based on a forked repo from github user [kizniche] https://github.com/kizniche/ttgo-tbeam-ttn-tracker
-#### Which in turn is based on the code from [xoseperez/ttgo-beam-tracker](https://github.com/xoseperez/ttgo-beam-tracker), with excerpts from [dermatthias/Lora-TTNMapper-T-Beam](https://github.com/dermatthias/Lora-TTNMapper-T-Beam) to fix an issue with incorrect GPS data being transmitted to The Things Network. I also added support for the 915 MHz frequency (North and South America). [lewisxhe/TTGO-T-Beam](https://github.com/lewisxhe/TTGO-T-Beam) was referenced for enabling use on the newer T-Beam board (Rev1).
+#### This version is based on a forked repo from github user [kizniche] https://github.com/kizniche/ttgo-tbeam-ttn-tracker. Which in turn is based on the code from [xoseperez/ttgo-beam-tracker](https://github.com/xoseperez/ttgo-beam-tracker), with excerpts from [dermatthias/Lora-TTNMapper-T-Beam](https://github.com/dermatthias/Lora-TTNMapper-T-Beam) to fix an issue with incorrect GPS data being transmitted to the network. Support was also added for the 915 MHz frequency (North and South America). [lewisxhe/TTGO-T-Beam](https://github.com/lewisxhe/TTGO-T-Beam) was referenced for enabling use on the newer T-Beam board (Rev1).
 
 This is a LoRaWAN node based on the [TTGO T-Beam](https://github.com/LilyGO/TTGO-T-Beam) development platform using the SSD1306 I2C OLED display.
 It uses a RFM95 by HopeRF and the MCCI LoRaWAN LMIC stack. This sample code is configured to connect to The LoRaWan network using the US 915 MHz frequency by default, but can be changed to EU 868 MHz.
 
-NOTE: There are now 2 versions of the TTGO T-BEAM, the first version (Rev0) and a newer version (Rev1). The GPS module on Rev1 is connected to different pins than Rev0. This code has been successfully tested on REV0, and is in the process of being tested on REV1. See the end of this README for photos of eah board.
+NOTE: There are now 2 versions of the TTGO T-BEAM, the first version (Rev0) and a newer version (Rev1). The GPS module on Rev1 is connected to different pins than Rev0. This code has been successfully tested on REV0, and is in the process of being tested on REV1. See the end of this README for photos of each board.
 
 ### Setup
 
@@ -34,11 +32,13 @@ NOTE: There are now 2 versions of the TTGO T-BEAM, the first version (Rev0) and 
 
 4. Edit this project file ```main/configuration.h``` and select your correct board revision, either T_BEAM_V07 or T_BEAM_V10 (see [T-BEAM Board Versions](#t-beam-board-versions) to determine which board revision you have).
 
-5. Edit this project file ```main/credentials.h``` to use either ```USE_ABP``` or ```USE_OTAA``` and add the Keys/EUIs for your Application's Device from The Things Network.
+5. Within your project edit ```main/credentials.h``` to add the device OTAA keys, ```Device EUI, App EUI and App Key```. These can be found within the device configuration within the Helium console. Be sure to pay special attention to the required format when adding these credentials.
 
-6. Within the Helium Console, add a Mapper integration. Details for adding a Mapper use a different edge node device than the one detailed below. When prompted to add a function decoder, use the following decoder. Step by step details can be found [here](https://docs.helium.com/use-the-network/coverage-mapping/mappers-quickstart/#mappers-quickstart)  
-<!-- 6. Add the TTN Mapper integration to your Application (and optionally the Data Storage integration if you want to access the GPS location information yourself or use [TTN Tracker](#ttn-tracker), then add the Decoder code:
--->
+6. Within the Helium Console, add a Mapper or Cargo integration.
+- step by step details for setting up a Mapper integration can be found [here](https://docs.helium.com/use-the-network/coverage-mapping/mappers-quickstart/#mappers-quickstart).
+- detail for setting up a Cargo integration can be found [here](https://docs.helium.com/use-the-network/console/integrations/cargo).
+
+The specific details for adding a Mapper or Cargo integration use a different edge node device than the one detailed here. When prompted to add a function decoder, be sure to use the following decoder.
 
 ```C
 function Decoder(bytes, port) {
@@ -62,14 +62,17 @@ function Decoder(bytes, port) {
 }
 ```
 
-7. Open this project file ```main/main.ino``` with the Arduino IDE and upload it to your TTGO T-Beam.
+7. Open this project file ```main/main.ino``` with the Arduino IDE Verify/Compile the project. If the compile is successful upload the application to your TTGO T-Beam.
 
-8. Turn on the device and once a GPS lock is acquired, the device will start sending data to TTN and TTN Mapper.
+8. Disconnect and turn on the device and once a GPS lock is acquired, the device should start sending data to the Helium network and Helium Mapper or Helium Cargo depending upon which you configured in step 6.
 
 
-### TTN Tracker
+### Using the Mapping Data
 
-I also developed [The Things Network Tracker (TTN-Tracker)](https://github.com/kizniche/ttn-tracker), a web app that pulls GPS data from TTN and displays it on a map in real-time (TTN Mapper is not real-time) that can be displayed on your phone, tablet, or computer. This is handy for testing signal range while driving, as you can see location points appearing under your moving location dot on the map (if you grant location sharing permissions to the web app) when a successful transmission has been achieved.
+Now that your device is hopefully connecting to the Helium network refer to the following for more details about interpreting the mapping data.
+- For the Helium Mapping effort visit [here](https://docs.helium.com/use-the-network/coverage-mapping)
+- For the Helium Cargo effort visit [here](https://docs.helium.com/use-the-network/console/integrations/cargo). Pay particular attention to the "Info" note found on this page.
+
 
 ### T-BEAM Board Versions
 
