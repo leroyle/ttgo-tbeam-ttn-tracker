@@ -1,12 +1,9 @@
 <!-- ## TTGO T-Beam Tracker for The Things Network and/or The Helium Network  -->
 ## TTGO T-Beam Tracker for use with a LoRaWan Networks
 
-This code was originally developed for use on The Things Network it has been editied/repurposed for use with the Helium Network.
+This code was originally developed for use on The Things Network (TTN) it has been editied/repurposed for use with the Helium Network.
 
-<!-- Uploads GPS data from the TTGO T-Beam to [The Things Network](https://www.thethingsnetwork.org) (TTN) and [TTN Mapper](https://ttnmapper.org) for tracking and determining signal strength of LoRaWAN gateways and nodes.
--->
-This TTGO device application uploads GPS data from the TTGO T-Beam to be used for tracking and determining signal strength of LoRaWAN gateways and nodes. e following networks are know to use this code:
-- [The Helium Network](https://www.helium.com) for [Helium Mapper](https://mappers.helium.com/) and [Helium Cargo](https://cargo.helium.com/)
+This TTGO device application uploads GPS data from the TTGO T-Beam to be used for tracking and determining signal strength of LoRaWAN gateways and nodes. When using the device and application on the Helium Network one can contribute to the [Helium Network](https://www.helium.com) Mapper or Cargo projects. Details for the Mapper project can be found [here](https://mappers.helium.com/) and details for Cargo can be found [here](https://cargo.helium.com/)
 
 Current version: 1.2.1
 
